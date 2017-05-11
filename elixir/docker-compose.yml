@@ -1,0 +1,8 @@
+version: "3"
+services:
+  web:
+    image: phoenix
+    container_name: xspeedit
+    volumes:
+      - .:/code
+    command: mix run -e Xspeedit.run
