@@ -12,16 +12,16 @@ public class Box {
 
     private List<Integer> listColis;
 
-    public Box(final Integer spaceLeft) {
+    Box(final Integer spaceLeft) {
         this.spaceLeft = spaceLeft;
         this.listColis = new LinkedList<>();
     }
 
-    public int getSpaceLeft() {
+    int getSpaceLeft() {
         return spaceLeft;
     }
 
-    public void addColis(Integer colis) {
+    void addColis(Integer colis) {
         this.listColis.add(colis);
         // We calculate the space left in the box
         this.spaceLeft -= colis;

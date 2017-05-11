@@ -21,7 +21,7 @@ public class Xspeedit {
 
         if (args.length == 1 && StringUtils.isNumeric(args[0])) {
             LOGGER.info("Processing colis: " + args[0]);
-            Map<Integer, List<Integer>> mapListColis = Utils.parseColisToMapList(args[0]);
+            Map<Integer, Integer> mapListColis = Utils.parseColisToMapList(args[0]);
 
             // We search the map for each colis size, starting by the biggest one
             for (int i = BOX_SIZE - 1; i > 0; i--) {
@@ -65,7 +65,7 @@ public class Xspeedit {
      * @param box          The current box to fill up
      * @param mapListColis The map of list of available colis
      */
-    private static void searchColisToFillTheBox(final Box box, final Map<Integer, List<Integer>> mapListColis) {
+    private static void searchColisToFillTheBox(final Box box, final Map<Integer, Integer> mapListColis) {
 
         // We lookup the map to find colis to fill the space left
         for (int i = box.getSpaceLeft(); i > 0; i--) {
