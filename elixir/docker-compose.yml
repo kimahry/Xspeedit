@@ -1,0 +1,8 @@
+version: "3"
+services:
+  prog:
+    image: phoenix
+    container_name: xspeedit
+    volumes:
+      - .:/code
+    command: mix test
