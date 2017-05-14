@@ -7,8 +7,12 @@ defmodule Xspeedit.Mixfile do
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     aliases: aliases(),
+     escript: escript(),
      deps: deps()]
   end
+
+  def escript, do: [main_module: Xspeedit]
 
   # Configuration for the OTP application
   #
@@ -29,5 +33,15 @@ defmodule Xspeedit.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     []
+  end
+
+   # Aliases are shortcuts or tasks specific to the current project.
+  # For example, to create, migrate and run the seeds file at once:
+  #
+  #     $ mix ecto.setup
+  #
+  # See the documentation for `Mix` for more info on aliases.
+  defp aliases do
+    ["start": ["run -e Xspeedit.main"]]
   end
 end
