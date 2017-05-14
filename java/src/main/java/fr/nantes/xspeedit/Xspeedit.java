@@ -21,22 +21,22 @@ public class Xspeedit {
 
         if (args.length == 1 && StringUtils.isNumeric(args[0])) {
             LOGGER.info("Processing colis: " + args[0]);
-            Map<Integer, Integer> mapListColis = Utils.parseColisToMapList(args[0]);
+            Map<Integer, Integer> inventory = Utils.parseColisToMapList(args[0]);
 
             // We search the map for each colis size, starting by the biggest one
             for (int i = BOX_SIZE - 1; i > 0; i--) {
 
-                if (mapListColis.containsKey(i)) {
+                if (inventory.containsKey(i)) {
 
-                    while (mapListColis.get(i) != null) {
+                    while (inventory.get(i) != null) {
                         // We create a new Box
                         Box box = new Box(BOX_SIZE);
                         // We insert the first colis
                         box.addColis(i);
                         // We remove the colis from the map
-                        Utils.removeColisFromMap(mapListColis, i);
+                        Utils.removeColisFromMap(inventory, i);
                         // We search the map for other colis to complete the box
-                        searchColisToFillTheBox(box, mapListColis);
+                        searchColisToFillTheBox(box, inventory);
                         // We add the box to the list of completed boxes
                         completedBoxes.add(box);
                     }
@@ -63,21 +63,21 @@ public class Xspeedit {
 
     /**
      * @param box          The current box to fill up
-     * @param mapListColis The map of list of available colis
+     * @param inventory The map of list of available colis
      */
-    private static void searchColisToFillTheBox(final Box box, final Map<Integer, Integer> mapListColis) {
+    private static void searchColisToFillTheBox(final Box box, final Map<Integer, Integer> inventory) {
 
         // We lookup the map to find colis to fill the space left
         for (int i = box.getSpaceLeft(); i > 0; i--) {
 
-            if (mapListColis.containsKey(i) && box.getSpaceLeft() - i >= 0) {
+            if (inventory.containsKey(i) && box.getSpaceLeft() - i >= 0) {
                 // We add the colis to the box
                 box.addColis(i);
                 // We remove the colis from the map
-                Utils.removeColisFromMap(mapListColis, i);
+                Utils.removeColisFromMap(inventory, i);
                 // If there is still some space left, we call the function again
                 if (box.getSpaceLeft() > 0) {
-                    searchColisToFillTheBox(box, mapListColis);
+                    searchColisToFillTheBox(box, inventory);
                 } else {
                     // If no space left, we stop the search
                     return;

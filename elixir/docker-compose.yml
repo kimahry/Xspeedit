@@ -1,7 +1,7 @@
 version: "3"
 services:
   prog:
-    image: phoenix
+    image: laurent44/phoenix
     container_name: xspeedit
     volumes:
       - .:/code
